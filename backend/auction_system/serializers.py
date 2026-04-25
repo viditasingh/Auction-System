@@ -158,12 +158,14 @@ class RFQCreateSerializer(serializers.ModelSerializer):
 
 class BidCreateSerializer(serializers.ModelSerializer):
     """Serializer for submitting new bids"""
+    supplier_name = serializers.CharField(write_only=True, required=True)
 
     class Meta:
         model = Bid
         fields = [
             'rfq', 'carrier_name', 'freight_charges', 'origin_charges',
-            'destination_charges', 'transit_time_days', 'quote_validity_days'
+            'destination_charges', 'transit_time_days', 'quote_validity_days',
+            'supplier_name'
         ]
 
     def validate(self, data):
@@ -202,5 +204,23 @@ class BidCreateSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         """Create bid and set supplier"""
-        validated_data['supplier'] = self.context['request'].user
-        return super().create(validated_data)
+        from django.contrib.auth.models import User
+
+        # Extract supplier_name from validated_data (not context)
+        supplier_name = validated_data.pop('supplier_name', 'Anonymous Bidder')
+        username = supplier_name.lower().replace(' ', '_')
+
+        # Get or create user with supplier name
+        user, created = User.objects.get_or_create(
+            username=username,
+            defaults={'first_name': supplier_name.split()[0] if ' ' in supplier_name else supplier_name}
+        )
+
+        validated_data['supplier'] = user
+        bid = super().create(validated_data)
+
+        # Update rankings for this RFQ immediately
+        from .tasks import update_bid_rankings
+        update_bid_rankings(str(bid.rfq_id))
+
+        return bid

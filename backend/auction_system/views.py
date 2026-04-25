@@ -79,6 +79,10 @@ class RFQViewSet(viewsets.ModelViewSet):
             rfq.auction.current_close_time = rfq.bid_close_time
             rfq.auction.save()
 
+        # Update rankings for any existing bids
+        if rfq.bids.exists():
+            update_bid_rankings(str(rfq.id))
+
         serializer = self.get_serializer(rfq)
         return Response(serializer.data)
 
@@ -161,13 +165,10 @@ class BidViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        # Create the bid
+        # Create the bid (ranking is updated in serializer)
         bid = serializer.save()
 
-        # Update bid rankings
-        update_bid_rankings.delay(str(bid.rfq_id))
-
-        # Evaluate auction extension
+        # Evaluate auction extension asynchronously
         evaluate_auction_extension.delay(str(bid.rfq_id), str(bid.id))
 
         # Create bid event
@@ -175,7 +176,7 @@ class BidViewSet(viewsets.ModelViewSet):
             rfq=bid.rfq,
             event_type='bid_received',
             bid=bid,
-            description=f"Bid received from {bid.supplier.get_full_name()} - ${bid.total_charges}",
+            description=f"Bid received from {bid.supplier.get_full_name() or bid.supplier.username} - ${bid.total_charges}",
             metadata={
                 'carrier_name': bid.carrier_name,
                 'total_charges': str(bid.total_charges)
@@ -186,6 +187,26 @@ class BidViewSet(viewsets.ModelViewSet):
             BidSerializer(bid).data,
             status=status.HTTP_201_CREATED
         )
+
+    def update(self, request, *args, **kwargs):
+        """Update a bid and recalculate rankings if charges changed"""
+        response = super().update(request, *args, **kwargs)
+
+        # Recalculate rankings for this RFQ
+        bid = self.get_object()
+        update_bid_rankings(str(bid.rfq_id))
+
+        return response
+
+    def partial_update(self, request, *args, **kwargs):
+        """Partial update a bid and recalculate rankings if charges changed"""
+        response = super().partial_update(request, *args, **kwargs)
+
+        # Recalculate rankings for this RFQ
+        bid = self.get_object()
+        update_bid_rankings(str(bid.rfq_id))
+
+        return response
 
 
 class AuctionEventViewSet(viewsets.ReadOnlyModelViewSet):
