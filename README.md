@@ -110,6 +110,10 @@ The backend provides a comprehensive REST API for auction management:
 - `POST /api/bids/` - Submit new bid
 - `GET /api/bids/{id}/` - Get bid details
 
+**Events & History**
+- `GET /api/events/` - List events
+- `GET /api/extension-history/` - List extensions
+
 For complete API documentation, see [backend/README.md](backend/README.md).
 
 ## 🏛️ Technology Stack
@@ -217,33 +221,12 @@ VITE_WS_URL=ws://localhost:8000/ws
 - **Recommendation Engine** - AI-powered auction recommendations for buyers
 - **Analytics & Reporting** - Detailed reports for sellers and admins
 
-### User Experience Enhancements
-- **Progressive Web App (PWA)** - Offline support and app-like experience
-- **Mobile App** - Native mobile applications for iOS and Android
-- **Dark Mode** - Support for dark theme across the application
-- **Multi-language Support** - i18n implementation for multiple languages
-- **Accessibility Improvements** - Enhanced accessibility features (WCAG compliance)
-
 ### Performance & Scalability
 - **Caching Strategy** - Redis caching for frequently accessed data
 - **Database Optimization** - Query optimization and indexing
 - **CDN Integration** - Content delivery network for static assets
 - **Load Balancing** - Multi-instance deployment strategy
 - **Monitoring & Logging** - Comprehensive logging and monitoring system
-
-### Security Enhancements
-- **Two-Factor Authentication (2FA)** - Enhanced account security
-- **API Rate Limiting** - Prevent abuse and ensure fair usage
-- **Data Encryption** - Encrypt sensitive data at rest and in transit
-- **Compliance** - GDPR and other data protection compliance
-- **Security Audit** - Regular security assessments and penetration testing
-
-### Community & Social Features
-- **User Reviews & Ratings** - Build trust and transparency
-- **Comments & Discussion** - Allow conversation around auctions
-- **Leaderboards** - Recognition for top sellers and buyers
-- **Social Sharing** - Share auctions on social media
-- **Referral Program** - Incentivize user growth
 
 ## 📄 Documentation Files
 
