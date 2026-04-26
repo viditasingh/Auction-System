@@ -59,6 +59,7 @@ src/
 │   ├── AuctionDetailPage.jsx   # Auction details with bids
 │   ├── CreateRFQPage.jsx       # Create new RFQ
 │   └── NotFoundPage.jsx        # 404 page
+│   └── SubmitBidPage.jsx       # Submit a bid from frontend
 ├── App.jsx                # Main app component with routing
 ├── main.jsx               # React entry point
 └── index.css              # Global styles
@@ -88,3 +89,4 @@ Using Lucide React for icons:
 ## WebSocket Support
 
 Ready for real-time updates via Django Channels. WebSocket consumers defined in backend will push live auction updates.
+
