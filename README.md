@@ -116,7 +116,7 @@ The backend provides a comprehensive REST API for auction management:
 
 For complete API documentation, see [backend/README.md](backend/README.md).
 
-## 🏛️ Technology Stack
+## Technology Stack
 
 ### Backend
 - **Framework:** Django 4.x
@@ -228,7 +228,7 @@ VITE_WS_URL=ws://localhost:8000/ws
 - **Load Balancing** - Multi-instance deployment strategy
 - **Monitoring & Logging** - Comprehensive logging and monitoring system
 
-## 📄 Documentation Files
+## Documentation Files
 
 - [Backend README](backend/README.md) - Backend setup and API documentation
 - [Frontend README](frontend/README.md) - Frontend setup and component documentation
