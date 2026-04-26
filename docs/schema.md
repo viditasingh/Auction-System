@@ -4,6 +4,8 @@
 
 The British Auction RFQ system uses PostgreSQL with the following core tables:
 
+![schema design](schematable.png)
+
 ## Tables
 
 ### RFQ Table

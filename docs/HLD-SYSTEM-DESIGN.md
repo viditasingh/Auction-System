@@ -8,8 +8,10 @@ A distributed four-tier web application for managing British-style auctions with
 
 ## 1. System Architecture Overview
 
-### 1.1 Architecture Diagram
 
+![hld diagram](hld_diagram.png)
+
+### 1.1 Architecture Diagram Overview
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                            Client Layer                                  │
