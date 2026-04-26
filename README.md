@@ -2,7 +2,7 @@
 
 A comprehensive real-time auction and RFQ (Request for Quotation) management system built with Django backend and React frontend. This platform enables seamless bidding, price discovery, and auction management with live updates.
 
-## 🌟 Features
+## Features
 
 ### Core Functionality
 - **Real-time Auction Management** - Live auction listing with instant updates via WebSocket
@@ -19,7 +19,7 @@ A comprehensive real-time auction and RFQ (Request for Quotation) management sys
 - **Asynchronous Tasks** - Celery integration for background job processing and scheduled tasks
 - **Modern UI/UX** - Built with React and Tailwind CSS for a clean, intuitive user experience
 
-## 📚 Documentation
+## Documentation
 
 The docs folder contains comprehensive documentation for the project:
 
@@ -28,7 +28,7 @@ The docs folder contains comprehensive documentation for the project:
 - **Setup Guide** - Complete setup and deployment instructions
 
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 .
@@ -50,7 +50,7 @@ The docs folder contains comprehensive documentation for the project:
 └── docs/                     # Project documentation
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -86,7 +86,7 @@ npm run dev
 The frontend will be available at `http://localhost:5173`
 The backend API will be available at `http://localhost:8000/api`
 
-## 🔌 API Overview
+## API Overview
 
 The backend provides a comprehensive REST API for auction management:
 
@@ -135,7 +135,7 @@ For complete API documentation, see [backend/README.md](backend/README.md).
 - **Icons:** Lucide React
 - **Routing:** React Router
 
-## 🔐 Environment Configuration
+## Environment Configuration
 
 ### Backend (.env)
 ```
@@ -152,7 +152,7 @@ VITE_API_URL=http://localhost:8000/api
 VITE_WS_URL=ws://localhost:8000/ws
 ```
 
-## 📦 Key Features Breakdown
+## Key Features Breakdown
 
 ### Auction Management
 - Create RFQs with specific parameters
@@ -174,7 +174,7 @@ VITE_WS_URL=ws://localhost:8000/ws
 - Optimized views for tablet and desktop
 - Accessible UI components
 
-## 🔮 Future Scope
+## Future Scope
 
 ### Authentication & Authorization
 - **Role-based Access Control (RBAC)** - Implement granular permission system for different user roles
